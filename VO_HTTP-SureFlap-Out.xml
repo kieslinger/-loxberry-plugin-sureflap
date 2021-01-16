@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VirtualOut Title="HTTP-SureFlap-Out" Comment="" Address="http://10.1.10.60" CmdInit="" CloseAfterSend="true" CmdSep="@">
+<VirtualOut Title="HTTP-SureFlap-Out" Comment="" Address="http://loxberry" CmdInit="" CloseAfterSend="true" CmdSep="@">
 	<VirtualOutCmd Title="SureFlap-Refresh" Comment="" CmdOnMethod="GET" CmdOffMethod="GET" CmdOn="/plugins/sureflap/getData.php?viname=SureFlap&amp;viparam=DateTime;DeviceOnline;DeviceSignal;DeviceLockModeID;DeviceCurfew;DeviceBatteryPerc;DeviceSignalHub;PetLocationID;PetLocationSince" CmdOnHTTP="" CmdOnPost="" CmdOff="" CmdOffHTTP="" CmdOffPost="" Analog="false" Repeat="0" RepeatRate="0"/>
 	<VirtualOutCmd Title="SureFlap-SetLockMode" Comment="" CmdOnMethod="GET" CmdOffMethod="GET" CmdOn="/plugins/sureflap/setLockMode.php?mode=&lt;v&gt;&amp;viname=SureFlap&amp;viparam=DeviceLockModeID" CmdOnHTTP="" CmdOnPost="" CmdOff="" CmdOffHTTP="" CmdOffPost="" Analog="true" Repeat="0" RepeatRate="0"/>
 	<VirtualOutCmd Title="SureFlap-Tiername-SetPetLocation" Comment="" CmdOnMethod="GET" CmdOffMethod="GET" CmdOn="/plugins/sureflap/setPetLocation.php?petname=Tiername&amp;location=&lt;v&gt;&amp;viname=SureFlap&amp;viparam=PetLocationID;PetLocationSince" CmdOnHTTP="" CmdOnPost="" CmdOff="" CmdOffHTTP="" CmdOffPost="" Analog="true" Repeat="0" RepeatRate="0"/>

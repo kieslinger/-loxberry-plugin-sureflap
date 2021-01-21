@@ -7,7 +7,8 @@ if(empty($_GET['petname'])){
 }
 
 // check parameter "location"
-switch($_GET['location']){
+$location_mode = $_GET['location'].$_GET['locationid'];
+switch($location_mode){
 	case "0":
 	case "in":
 		$location = 1;
@@ -19,7 +20,7 @@ switch($_GET['location']){
 		$location_str = "outside";
 		break;
 	default:
-		die("Usage: ".$_SERVER['PHP_SELF']."?petname=[...]&location=[0|1] or [in|out]\n");
+		die("Usage: ".$_SERVER['PHP_SELF']."?petname=[...]&locationid=[0|1] or ?location=[in|out]\n");
 }
 
 $params = [
@@ -72,10 +73,10 @@ if($curr_location_id == $location) {
 	if($config_http_send == 1) {
 		// Build data to responce
 		$pets = array(array("id" => $petid, "name" => $petname, "position" => $result['data']));
-		include 'getPets.php';
+		include 'modul_getPets.php';
 		// Responce to virutal input
 		LOGDEB("Starting Response to miniserver...");
-		include_once 'sendResponces.php';
+		include_once 'modul_sendResponces.php';
 	}
 }
 

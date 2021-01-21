@@ -17,7 +17,7 @@ if($background) {
 }
 
 // load config
-include_once 'config.php';
+include_once 'modul_getConfig.php';
 
 // send request
 if($token) {
@@ -33,7 +33,7 @@ if($token) {
 if(curl_getinfo($ch, CURLINFO_HTTP_CODE) != "200") {
 	LOGWARN("Token needs to be renewed!");
 	// getting new token
-	include_once 'login.php';
+	include_once 'modul_login.php';
 	
 	// resend request
 	LOGDEB("Restarting request...");
@@ -51,17 +51,23 @@ print "System@DateTimeLox@".epoch2lox(time())."<br><br>";
 // getting household
 LOGDEB("Getting households...");
 $households = $result['data']['households'];
-include 'getHouseholds.php';
+include 'modul_getHouseholds.php';
 
 // getting devices
 LOGDEB("Getting devices...");
 $devices = $result['data']['devices'];
-include 'getDevices.php';
+include 'modul_getDevices.php';
+
+// Backward compatibility
+if(!empty($_GET['name']) and empty($_GET['petname'])) {
+	$_GET['petname'] = $_GET['name'];
+	LOGWARN("Parameter name should no longer be used! Please use petname instead.");
+}
 
 // getting pets
 LOGDEB("Getting pets...");
 $pets = $result['data']['pets'];
-include 'getPets.php';
+include 'modul_getPets.php';
 
 if($background) {
 	// do not print data in background
@@ -71,7 +77,7 @@ if($background) {
 	// Responce to virutal input?
 	if($config_http_send == 1) {
 		LOGDEB("Starting Response to miniserver...");
-		include_once 'sendResponces.php';
+		include_once 'modul_sendResponces.php';
 	} 
 	// print data
 	ob_end_flush();

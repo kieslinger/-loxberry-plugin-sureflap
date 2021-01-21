@@ -2,7 +2,8 @@
 require_once "loxberry_log.php";
 
 // check inputs
-switch($_GET['mode']) {
+$led_mode = $_GET['mode'].$_GET['modeid'];
+switch($led_mode) {
 	case "0":
 	case "off":
 		$led = 0;
@@ -19,7 +20,7 @@ switch($_GET['mode']) {
 		$led_str = "dim";
 		break;
 	default:
-		die("Usage: ".$_SERVER['PHP_SELF']."?mode=[0|1|2][off|bright|dim]<br>");			
+		die("Usage: ".$_SERVER['PHP_SELF']."?modeid=[0|1|2] or ?mode=[off|bright|dim]<br>");			
 }
 
 $params = [
@@ -61,10 +62,10 @@ if($device_led_id == $led) {
 	if($config_http_send == 1) {
 		// Build data to responce
 		$devices = array(array("id" => $hub, "name" => $hubname, "product_id" => 1, "control" => $result['data']));
-		include 'getDevices.php';
+		include 'modul_getDevices.php';
 		// Responce to virutal input
 		LOGDEB("Starting Response to miniserver...");
-		include_once 'sendResponces.php';
+		include_once 'modul_sendResponces.php';
 	}		
 }
 

@@ -39,7 +39,7 @@ if($config_http_send == 1) {
 }
 
 // Invent something for mandatory fingerprintJs login value. Any 32bit integer will suffice.
-$config_device_id = (string) rand(1000000000,9999999999);
+$config_device_id = (string) rand(1000000000,1999999999);
 
 // get last token
 LOGDEB("Getting last token");

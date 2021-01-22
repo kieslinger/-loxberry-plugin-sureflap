@@ -2,7 +2,8 @@
 require_once "loxberry_log.php";
 
 // check inputs
-switch($_GET['mode'] ) {	
+$lock_mode = $_GET['mode'].$_GET['modeid'];
+switch($lock_mode) {	
 	case "0":
 	case "none":
 		$lock = 0;
@@ -24,7 +25,7 @@ switch($_GET['mode'] ) {
 		$lock_str = "lock both";
 		break;
 	default:
-		die("Usage: ".$_SERVER['PHP_SELF']."?mode=[0|1|2|3] or [none|in|out|both|]<br>");
+		die("Usage: ".$_SERVER['PHP_SELF']."?modeid=[0|1|2|3] or ?mode=[none|in|out|both|]<br>");
 }
 
 $params = [
@@ -66,10 +67,10 @@ if($device_lock_id == $lock) {
 	if($config_http_send == 1) {
 		// Build data to responce
 		$devices = array(array("id" => $flap, "name" => $flapname, "product_id" => $flaptype, "control" => $result['data']));
-		include 'getDevices.php';
+		include 'includes/getDevices.php';
 		// Responce to virutal input
 		LOGDEB("Starting Response to miniserver...");
-		include_once 'sendResponces.php';
+		include_once 'includes/sendResponces.php';
 	}	
 }
 

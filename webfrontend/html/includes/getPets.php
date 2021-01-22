@@ -27,30 +27,31 @@ if($pets) {
 			// Weight
 			print $multi."PetWeight@".$pet['weight']." kg<br>";
 			// Gender
-			print $multi."PetGenderID@".$pet['gender']."<br>";
+			print $multi."PetGender@".$pet['gender']."<br>";
 			if($pet['gender'] == 0) {
-				print $multi."PetGender@Female<br>";
+				print $multi."PetGenderDesc@Female<br>";
 			} else {
-				print $multi."PetGender@Male<br>";
+				print $multi."PetGenderDesc@Male<br>";
 			}
 			// Species
-			print $multi."PetSpeciesID@".$pet['species_id']."<br>";
+			print $multi."PetSpecies@".$pet['species_id']."<br>";
 			if($pet['species_id'] == 2) {
-				print $multi."PetSpecies@Dog<br>";
+				print $multi."PetSpeciesDesc@Dog<br>";
 			} else {
-				print $multi."PetSpecies@Cat<br>";
+				print $multi."PetSpeciesDesc@Cat<br>";
 			}
 			// Location
-			$curr_location_id = $pet['position']['where'] - 1;
-			if($curr_location_id == 0) {
+			$curr_location_id = $pet['position']['where'];
+			if($curr_location_id == 1) {
 				$curr_location = "Inside";
 			} else {
 				$curr_location = "Outside";
 			}
-			print $multi."PetLocationID@".$curr_location_id."<br>";
-			$curr_location_id = $pet['position']['where'];
-			print $multi."PetLocation@$curr_location<br>";
-			LOGINF("PetLocation@".$curr_location);		
+			print $multi."PetLocation@".$curr_location_id."<br>";
+			$curr_location_lox = $curr_location_id - 1;
+			print $multi."PetLocationLox@$curr_location_lox<br>";
+			print $multi."PetLocationDesc@$curr_location<br>";			
+			LOGINF("PetLocationDesc@$curr_location");		
 			// Last location time			
 			$pet_loc_time = strtotime($pet['position']['since']);
 			print $multi."PetLocationSince@".date('d.m.Y H:i:s', $pet_loc_time)."<br>";

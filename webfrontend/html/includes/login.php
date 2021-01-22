@@ -1,6 +1,8 @@
 <?php
+
 LOGDEB("Requesting new token");
 $json = json_encode(array("email_address" => $config_email_address, "password" => $config_password, "device_id" => $config_device_id));
+
 $ch = curl_init($endpoint."/api/auth/login");
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
@@ -18,4 +20,5 @@ if(curl_getinfo($ch, CURLINFO_HTTP_CODE) == "200" and $result['data']['token']) 
 	LOGERR("Login Failed!");
 	die("Login Failed!");
 }
+
 ?>

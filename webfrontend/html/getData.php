@@ -8,7 +8,7 @@ $params = [
 ];
 $log = LBLog::newLog ($params);
 
-// called from other includes?
+// called from other modul?
 ob_start();
 if($background) {	
 	LOGINF("Getting data from getData.php...");
@@ -17,7 +17,7 @@ if($background) {
 }
 
 // load config
-include_once 'includes/getConfig.php';
+include_once 'includes/config.php';
 
 // send request
 if($token) {

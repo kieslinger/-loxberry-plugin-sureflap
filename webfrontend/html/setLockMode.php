@@ -67,10 +67,10 @@ if($device_lock_id == $lock) {
 	if($config_http_send == 1) {
 		// Build data to responce
 		$devices = array(array("id" => $flap, "name" => $flapname, "product_id" => $flaptype, "control" => $result['data']));
-		include 'modul_getDevices.php';
+		include 'includes/getDevices.php';
 		// Responce to virutal input
 		LOGDEB("Starting Response to miniserver...");
-		include_once 'modul_sendResponces.php';
+		include_once 'includes/sendResponces.php';
 	}	
 }
 

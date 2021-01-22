@@ -2,19 +2,28 @@
 require_once "loxberry_log.php";
 
 // check parameter "petname"
+// Backward compatibility
+if(isset($_GET['name'])) {
+	$_GET['petname'] = $_GET['name'];
+	LOGWARN("Parameter name should no longer be used! Please use petname instead.");
+}
 if(empty($_GET['petname'])){
 	die("Usage: ".$_SERVER['PHP_SELF']."?petname=[...]&location=[1|2] or [in|out]\n");
 }
+if(isset($_GET['locationLox'])) {
+	$_GET['location'] = $_GET['locationLox'] + 1;
+}	
 
 // check parameter "location"
 $location_mode = $_GET['location'].$_GET['locationid'];
+print $location_mode;
 switch($location_mode){
-	case "0":
+	case "1":
 	case "in":
 		$location = 1;
 		$location_str = "inside";
 		break;
-	case "1":
+	case "2":
 	case "out":
 		$location = 2;
 		$location_str = "outside";
@@ -73,10 +82,10 @@ if($curr_location_id == $location) {
 	if($config_http_send == 1) {
 		// Build data to responce
 		$pets = array(array("id" => $petid, "name" => $petname, "position" => $result['data']));
-		include 'modul_getPets.php';
+		include 'includes/getPets.php';
 		// Responce to virutal input
 		LOGDEB("Starting Response to miniserver...");
-		include_once 'modul_sendResponces.php';
+		include_once 'includes/sendResponces.php';
 	}
 }
 
